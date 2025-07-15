@@ -1,16 +1,135 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-</head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BI Analyst Demo for Agile Space Industries</title>
+    <style>
+        /* Import a Google Font similar to the one AGILE uses */
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto:wght@400;700&display=swap');
 
+        :root {
+            --dark-blue-bg: #0D1B2A; /* A deep navy/charcoal for the background */
+            --accent-orange: #F76902;  /* The signature orange for highlights */
+            --text-light: #F5F5F5;    /* A slightly off-white for text */
+            --text-secondary: #a8b2c2; /* A lighter gray for subheadings */
+        }
+
+        /* --- Basic Page Setup --- */
+        body {
+            background-color: var(--dark-blue-bg);
+            color: var(--text-light);
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+        }
+
+        /* --- Main Content Container --- */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto; /* Centers the content on the page */
+            padding: 20px;
+        }
+
+        /* --- Header & Footer --- */
+        .header, .footer {
+            padding: 20px 0;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2.5em;
+            color: var(--text-light);
+            margin: 0;
+        }
+
+        .header h2 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.2em;
+            color: var(--text-secondary);
+            font-weight: 400;
+            margin: 5px 0 0 0;
+        }
+        
+        .footer p {
+            font-size: 0.9em;
+            color: var(--text-secondary);
+        }
+
+        /* --- Project Description Section --- */
+        .description {
+            background-color: rgba(255, 255, 255, 0.05); /* A very subtle background tint */
+            border-radius: 8px;
+            padding: 25px;
+            margin-top: 30px;
+            margin-bottom: 40px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .description p {
+            font-size: 1.1em;
+        }
+        
+        .description a {
+            color: var(--accent-orange);
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        .description a:hover {
+            text-decoration: underline;
+        }
+
+        /* --- BI Dashboard Container --- */
+        .dashboard-container {
+            position: relative;
+            width: 100%;
+            /* This maintains a 16:9 aspect ratio for the dashboard */
+            padding-top: 56.25%; 
+            background: #000;
+            border-radius: 8px;
+            overflow: hidden; /* This keeps the corners rounded */
+        }
+
+        .dashboard-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
+    </style>
+</head>
 <body>
-<ol>
-    <li> Objective: A clear statement: "This is a sample project designed to demonstrate the core competencies required for the Senior Business Intelligence Analyst role at Agile Space Industries. The following dashboards are built from a synthetic, cross-functional dataset I created to reflect a typical aerospace manufacturing environment."</li>
-    <li>Tools Used: List the technologies. E.g., "Data Generation: Python (Pandas, Faker). Data Transformation: SQL and Power Query. Visualization: Power BI / Tableau."</li>
-    <li>Methodology: Briefly explain your process for defining metrics and how you structured the data to mimic an ERP system like Deltek Costpoint.</li>
-    <li> to Dashboards: Clear navigation to the different dashboard views.</li>
-</ol>
+
+    <div class="container">
+
+        <header class="header">
+            <h1>Senior Business Intelligence Analyst</h1>
+            <h2>Portfolio Demonstration for Agile Space Industries</h2>
+        </header>
+
+        <main>
+            <section class="description">
+                <p>
+                    This is a sample project designed to demonstrate the core competencies required for the Senior Business Intelligence Analyst role. The following dashboard is built from a synthetic, cross-functional dataset I created to reflect a typical aerospace manufacturing environment, mimicking data from systems like Deltek Costpoint. For more information, please see the project repository on <a href="https://github.com/coc-webmaster/agile-demo" target="_blank">GitHub</a>.
+                </p>
+            </section>
+
+            <section class="dashboard-container">
+                <p style="text-align:center; padding-top: 25%;">Dashboard loading...</p>
+            </section>
+        </main>
+
+        <footer class="footer">
+            <p>Chip Olson Consulting | Demonstration Project</p>
+        </footer>
+
+    </div>
 
 </body>
-
 </html>
