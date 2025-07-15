@@ -13,6 +13,8 @@
             --accent-orange: #F76902;  /* The signature orange for highlights */
             --text-light: #F5F5F5;    /* A slightly off-white for text */
             --text-secondary: #a8b2c2; /* A lighter gray for subheadings */
+            --nav-bg: rgba(255, 255, 255, 0.05); /* A very subtle background tint for navigation */
+            --nav-border: rgba(255, 255, 255, 0.1);
         }
 
         /* --- Basic Page Setup --- */
@@ -28,7 +30,7 @@
         /* --- Main Content Container --- */
         .container {
             max-width: 1200px;
-            margin: 0 auto; /* Centers the content on the page */
+            margin: 0 auto;
             padding: 20px;
         }
 
@@ -58,39 +60,57 @@
             color: var(--text-secondary);
         }
 
+        /* --- NEW: Navigation Bar Styling --- */
+        .navigation {
+            text-align: center;
+            margin: 30px 0;
+        }
+        .nav-link {
+            font-family: 'Montserrat', sans-serif;
+            color: var(--text-secondary);
+            background-color: var(--nav-bg);
+            border: 1px solid var(--nav-border);
+            padding: 10px 20px;
+            margin: 0 5px;
+            border-radius: 5px;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.2s ease-in-out;
+        }
+        .nav-link:hover {
+            color: var(--text-light);
+            background-color: var(--accent-orange);
+            border-color: var(--accent-orange);
+        }
+        .nav-link.active {
+            color: var(--text-light);
+            background-color: var(--accent-orange);
+            border-color: var(--accent-orange);
+            font-weight: 700;
+        }
+        /* --- End of New Styles --- */
+
         /* --- Project Description Section --- */
         .description {
-            background-color: rgba(255, 255, 255, 0.05); /* A very subtle background tint */
+            background-color: var(--nav-bg);
             border-radius: 8px;
             padding: 25px;
-            margin-top: 30px;
             margin-bottom: 40px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            border: 1px solid var(--nav-border);
         }
 
-        .description p {
-            font-size: 1.1em;
-        }
-        
-        .description a {
-            color: var(--accent-orange);
-            font-weight: bold;
-            text-decoration: none;
-        }
-
-        .description a:hover {
-            text-decoration: underline;
-        }
+        .description p { font-size: 1.1em; }
+        .description a { color: var(--accent-orange); font-weight: bold; text-decoration: none; }
+        .description a:hover { text-decoration: underline; }
 
         /* --- BI Dashboard Container --- */
         .dashboard-container {
             position: relative;
             width: 100%;
-            /* This maintains a 16:9 aspect ratio for the dashboard */
-            padding-top: 56.25%; 
+            padding-top: 56.25%; /* 16:9 Aspect Ratio */
             background: #000;
             border-radius: 8px;
-            overflow: hidden; /* This keeps the corners rounded */
+            overflow: hidden;
         }
 
         .dashboard-container iframe {
@@ -113,15 +133,20 @@
             <h2>Portfolio Demonstration for Agile Space Industries</h2>
         </header>
 
+        <nav class="navigation">
+            <a href="#" class="nav-link active" data-dashboard="executive">Executive Summary</a>
+            <a href="#" class="nav-link" data-dashboard="pm">Program Manager Deep Dive</a>
+            <a href="#" class="nav-link" data-dashboard="finance">Finance & Operations</a>
+        </nav>
         <main>
             <section class="description">
                 <p>
-                    This is a sample project designed to demonstrate the core competencies required for the Senior Business Intelligence Analyst role. The following dashboard is built from a synthetic, cross-functional dataset I created to reflect a typical aerospace manufacturing environment, mimicking data from systems like Deltek Costpoint. For more information, please see the project repository on <a href="https://github.com/coc-webmaster/agile-demo" target="_blank">GitHub</a>.
+                    This is a sample project designed to demonstrate the core competencies for the Senior Business Intelligence Analyst role. The following interactive dashboards are built from a synthetic, cross-functional dataset I created to reflect a typical aerospace manufacturing environment. For more information, please see the project repository on <a href="https://github.com/coc-webmaster/agile-demo" target="_blank">GitHub</a>.
                 </p>
             </section>
 
             <section class="dashboard-container">
-                <p style="text-align:center; padding-top: 25%;">Dashboard loading...</p>
+                <iframe id="dashboard-iframe" src="" title="BI Dashboard"></iframe>
             </section>
         </main>
 
@@ -131,5 +156,50 @@
 
     </div>
 
-</body>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const navLinks = document.querySelectorAll('.nav-link');
+            const dashboardIframe = document.getElementById('dashboard-iframe');
+
+            // --- IMPORTANT ---
+            // Replace these placeholder URLs with your actual Power BI / Tableau embed links.
+            const dashboardUrls = {
+                executive: "YOUR_EXECUTIVE_DASHBOARD_URL_HERE",
+                pm: "YOUR_PROGRAM_MANAGER_DASHBOARD_URL_HERE",
+                finance: "YOUR_FINANCE_DASHBOARD_URL_HERE"
+            };
+
+            // Function to load a dashboard
+            function loadDashboard(dashboardKey) {
+                if (dashboardUrls[dashboardKey]) {
+                    dashboardIframe.src = dashboardUrls[dashboardKey];
+                }
+            }
+
+            // Set the active link and load the correct dashboard
+            function setActiveLink(clickedLink) {
+                // Remove 'active' class from all links
+                navLinks.forEach(link => link.classList.remove('active'));
+                // Add 'active' class to the clicked link
+                clickedLink.classList.add('active');
+                // Load the corresponding dashboard
+                loadDashboard(clickedLink.dataset.dashboard);
+            }
+
+            // Add click event listeners to all nav links
+            navLinks.forEach(link => {
+                link.addEventListener('click', function(event) {
+                    event.preventDefault(); // Prevents the link from navigating
+                    setActiveLink(this);
+                });
+            });
+
+            // Load the default dashboard (Executive Summary) on page load
+            const defaultActiveLink = document.querySelector('.nav-link.active');
+            if (defaultActiveLink) {
+                loadDashboard(defaultActiveLink.dataset.dashboard);
+            }
+        });
+    </script>
+    </body>
 </html>
